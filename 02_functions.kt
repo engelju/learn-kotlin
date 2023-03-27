@@ -90,3 +90,55 @@ fun printAll(vararg messages: String) {
 fun log(vararg entries: String) {
     printAll(*entries)
 }
+
+// part 4: variables and null safety
+
+fun main() {
+ 
+    // you can have mutable and immutable variables:
+    var a: String = "initial value"		// mutable variable
+    val b: Int = 1						// immutable variable
+
+    // you usually let the compiler infer the type of a variable:
+    val c = 3
+    
+    // rule of thumb: use "val" over "var" and skip the types.
+     
+    // null safety: in an effort to get rid of NullPoinerException, variables in kotlin cannot be assigned "null".
+	// if you need a variable that can be null, declare it "nullable" by adding "?" at the end of its type.
+    
+    var neverNull: String = "this can never be null"
+    // neverNull = null			// compiler error
+    
+    var nullable: String? = "this totally can be null"
+    nullable = null
+    
+    var inferredNonNull = "the compiler assumes non-null"
+    // inferredNonNull = null	// compiler error 
+    
+    fun strLen(notNull: String): Int {
+        return notNull.length
+    }
+    
+    strLen(neverNull)
+    // strLen(nullable)			// compiler error
+    strLen(inferredNonNull)
+    
+    // if you have to deal with null values (eg. when dealing with Java or truly absent values),
+    // Kotlin provides "null-tracking" by using "?" in appropriate places and checking for "null".
+    fun describeString(maybeString: String?): String {
+        if (maybeString != null && maybeString.length > 0) {
+            return "String has length: ${maybeString.length}"
+        } else {
+            return "Empty or null string"
+        }
+    }
+    
+    println(describeString("this is a string"))
+    println(describeString(null))
+    println(describeString(""))
+}
+
+
+
+
