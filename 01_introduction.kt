@@ -139,6 +139,27 @@ fun main() {
     println(describeString(""))
 }
 
+// part 5: classes
+
+// we can create a class without any properties or user-defined constructors.
+// kotlin will auto-generate a non-parameterized default one.
+class Customer
+
+// class with two properties, immutable id and mutable email, and a constructor 
+// with two parameters "id" and "email"
+class Contact(val id: Int, var email: String)
+
+fun main() {
+    // to instantiate a new object we don't need the "new" keyword
+    val customer = Customer()
+    val contact = Contact(1, "me@me.org")
+    // to access properties we use the dot "."
+    println(contact.id)
+    // we can also update the values of properties similiarly
+    contact.email = "no@none.org"
+    println(contact.email)
+}
+
 
 
 
