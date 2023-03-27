@@ -61,3 +61,32 @@ class Person(val name: String) {
         likedPeople.add(other)
     }
 }
+
+// part 3: operator functions and varargs
+
+fun main() {
+
+    // functions can be "upgraded" to have operators, so you can call them using
+    // their correspoding operator symbol.
+
+    operator fun Int.times(msg: String) = msg.repeat(this)
+    println(2 * "Bye ")
+    
+    operator fun String.get(range: IntRange) = substring(range)
+    val str = "Dieser Satz wird extra abgeschnitten"
+    println(str[0..14])
+    
+    printAll("Hello", "Hola", "Salut", "Hallo", "Hi")
+    log("Hello", "Hola", "Salut", "Hallo", "Hi")
+}
+
+// varargs allow you to pass any number of arguments by seperating them with commas.
+fun printAll(vararg messages: String) {
+    for (m in messages) println(m)
+}
+
+// vararg is technically an array at runtime. to pass it along as a vararg, use the spread operator "*". 
+// this will pass *entries as a vararg of String instead of of entries, an Array<String>.
+fun log(vararg entries: String) {
+    printAll(*entries)
+}
