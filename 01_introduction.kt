@@ -191,4 +191,58 @@ fun main() {
   println(stack)
 }
 
+// part 7: inheritance
+
+// kotlin classes and methods are final by default. 
+// to allow inheritance, use the "open" modifier.
+
+open class Dog {
+    open fun sayHello() {
+        println("wuff wuff")
+    }
+}
+
+// a class inherits a superclass by specifying ": Superclassname()" after its name.
+// the empty parents indicate an invocation of the superclass default constructor.
+class Yorkshire : Dog() {
+    override fun sayHello() {
+        println("ruff ruff")
+    }
+}
+
+fun main() {
+    val dog : Dog = Yorkshire()
+    dog.sayHello()
+}
+
+// you can parameterize constructors from the superclass
+
+open class Tiger(val origin: String) {
+    fun sayHello() {
+        // you can use ${origin} or $origin
+        println("a tiger from ${origin} says hello")
+    }
+}
+
+class SibirianTiger : Tiger("Sibiria")
+
+// you can also pass constructor arguments to the superclass
+
+open class Lion(val name: String, val origin: String) {
+    fun sayHello() {
+        println("$name, the lion from $origin says: GRAWR")
+    }
+}
+
+class AsiaticLion(name: String) : Lion(name = name, origin = "India")
+
+fun main () {
+    val tiger: Tiger = SibirianTiger()
+    tiger.sayHello()
+    
+    val lion: Lion = AsiaticLion("Rufo")
+    lion.sayHello()
+}
+
+
 
